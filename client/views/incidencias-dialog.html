@@ -1,0 +1,112 @@
+<form name="editForm" role="form" novalidate>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="clear()">&times;</button>
+        <h4 class="modal-title" id="myCarpetaLabel">Crear o editar incidencia</h4>
+    </div>
+    <div class="modal-body no-padding-left no-padding-right">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="field_laboratorio">Laboratorio</label>
+                        <div class="input-group">
+                            <input type="text" id="field_laboratorio" class="form-control" ng-model="incidencia.laboratorio" disabled>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a>Nuevo laboratorio</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li ng-repeat="laboratorio in laboratorios" ng-click="selectLaboratorio(laboratorio)"><a>{{laboratorio}}</a></li>
+                                </ul>
+                            </div><!-- /btn-group -->
+                        </div>
+                    </div><!-- /input-group -->
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="field_maquina">Máquina</label>
+                        <select class="form-control" id="field_maquina" name="maquina" ng-model="incidencia.maquina">
+                            <option ng-click="selectMaquina(undefined)"></option>
+                            <option ng-repeat="maquina in maquinas" ng-click="selectMaquina(maquina)">{{maquina}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <hr>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="field_fecha">Fecha</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="field_fecha" datetime-picker="dd MMM yyyy HH:mm" ng-model="incidencia.falla.fecha" is-open="isOpen"  />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openCalendar($event, prop)"><span class="glyphicon glyphicon-calendar"></span></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="field_codigoError">Código de error</label>
+                        <input class="form-control" id="field_codigoError" ng-model="incidencia.falla.codigo">
+                    </div>
+                    <div class="form-group">
+                        <label for="field_descripcionError">Descripción del error</label>
+                        <textarea class="form-control text-area" rows="4" id="field_descripcionError" ng-model="incidencia.falla.descripcion"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="field_estadoFalla">Estado de la falla</label>
+                        <input class="form-control" id="field_estadoFalla" ng-model="incidencia.falla.estado">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="field_sistema_operativo">Sistema Operativo</label>
+                        <div class="input-group">
+                            <input class="form-control" type="text" id="field_sistema_operativo" name="sistema_operativo" ng-model="incidencia.falla.sistemaOperativo.nombre">
+                            <span class="input-group-addon">
+                                <input type="checkbox" ng-model="incidencia.falla.sistemaOperativo.virtual"> Virtual
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="field_comentarioSistemaOperativo">Comentario del Sistema Operativo</label>
+                        <textarea class="form-control text-area" rows="4" id="field_comentarioSistemaOperativo" ng-model="incidencia.falla.sistemaOperativo.comentario"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="field_condicionesEjecucion">Condiciones de ejecución</label>
+                        <textarea class="form-control text-area" rows="4" id="field_condicionesEjecucion" ng-model="incidencia.falla.condiciones"></textarea>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <hr>
+                </div>
+                <div class="col-sm-12">
+                    <label class="control-label">Capturas</label>
+                    <br>
+                    <div class="drop-zone" ngf-drop ngf-change="setImagen($file)" ngf-pattern="'image/*'">
+                        <h4 ng-hide="incidencia.falla.capturas.length > 1">Arrastra las imagenes aqui</h4>
+                        <div ng-repeat="captura in incidencia.falla.capturas track by $index" class="image-block">
+                            <button type="button" class="btn btn-xs top-buttons"
+                                    ng-click="eliminarImagen($index)"><span class="glyphicon glyphicon-remove"></span></button>
+                            <img data-ng-src="{{'data:' + captura.imagenContentType + ';base64,' + captura.imagen}}"/>
+                        </div>
+                        <button type="file" ngf-select class="btn btn-default btn-xs"
+                                ngf-change="setImagen($file)" accept="image/*"
+                                ng-hide="incidencia.falla.capturas.length > 3">
+                            Subir imagen
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancelar</span>
+        </button>
+        <button ng-click="save()" ng-disabled="editForm.$invalid || isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Guardar</span>
+        </button>
+    </div>
+</form>

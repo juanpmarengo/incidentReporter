@@ -1,0 +1,164 @@
+body{
+  background-image: url("../images/background.png");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.panel-body{
+  position: relative;
+  .edit-buttons{
+    position: absolute;
+    margin-top: 3px;
+    margin-right: 3px;
+    top: 0;
+    right: 0;
+  }
+}
+
+.form-control[readonly]{
+  background-color: #fff;
+}
+
+#loading-bar .bar {
+  background: red;
+  height: 3px;
+}
+
+/* Fancy blur effect */
+#loading-bar .peg {
+  height: 3px;
+  -moz-box-shadow: red 1px 0 6px 1px;
+  -ms-box-shadow: red 1px 0 6px 1px;
+  -webkit-box-shadow: red 1px 0 6px 1px;
+  box-shadow: red 1px 0 6px 1px;
+}
+
+#loading-bar-spinner .spinner-icon {
+  width: 22px;
+  height: 22px;
+  border:  solid 3px transparent;
+  border-top-color: #dd231e;
+  border-left-color: #dd231e;
+}
+
+.filtro > hr{
+  margin: 10px 0;
+}
+.filtro > div > hr{
+  margin: 10px 0;
+}
+.image-block{
+  position: relative;
+  display: inline-block;
+  width: 25%;
+  height: 100%;
+  padding: 5px;
+}
+.image-block > button{
+  display: none;
+}
+.image-block:hover > button{
+  z-index: 9;
+  display: block;
+  background-color: transparent;
+  color: red;
+}
+.image-block > img{
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  max-width: 95%;
+  max-height: 95%;
+}
+.drop-zone{
+  position: relative;
+  background-color: #fff;
+  border: 2px dashed #00b3ee;
+  border-radius: 5px;
+  height: 150px;
+}
+.capturas{
+  position: relative;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 150px;
+  h4 {
+    position: absolute;
+    top: 43%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ccc;
+  }
+}
+.drop-zone > h4{
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #00b3ee;
+}
+.drop-zone > button{
+  position: absolute;
+  margin: 15px;
+  right: 0;
+  bottom: 0;
+}
+.panel-heading {
+  background-color: #F5F5BC!important;
+}
+.solved > .panel-heading{
+  background-color: #cbff7b!important;
+}
+
+.template{
+  position: relative;
+}
+.top-buttons{
+  position: absolute;
+  top:0;
+  right: 0;
+}
+.text-area{
+  padding: 13px 12px;
+}
+.no-padding{
+  padding: 0;
+}
+.margin-bottom{
+  margin-bottom: 15px;
+}
+.pull-right{
+  float: right;
+}
+
+.well{
+  position: relative;
+  padding-top: 40px;
+}
+.nav{
+  position: absolute!important;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.nav-tabs{
+  background-color: white;
+}
+.nav-tabs > li.active > a{
+  background-color: #f5f5f5;
+}
+/* ==========================================================================
+Designed by footer
+========================================================================== */
+.footer{
+  position: fixed;
+  bottom: 0;
+  background: #424242;
+  color: #adadad;
+  width: 100%;
+  text-align: center;
+  border-top: 1px solid black;
+  font-style: italic;
+}

@@ -1,0 +1,130 @@
+<div class="template">
+    <h2>Incidencias</h2>
+    <button class="btn btn-primary top-buttons" ui-sref="incidencias.new" >
+        <span class="glyphicon glyphicon-plus"></span>
+        <span >
+            Crear nueva incidencia
+        </span>
+    </button>
+    <div class="row">
+        <div class="col-xs-6">
+            <a ng-click="isCollapsed = !isCollapsed"><span ng-hide="isCollapsed">Mostrar filtro</span><span ng-show="isCollapsed">Ocultar filtro</span></a>
+        </div>
+        <div class="col-xs-6">
+            <div class="pull-right">
+                Mostar solucionados <input type="checkbox" ng-click="mostrarSolucionados()">
+            </div>
+        </div>
+    </div>
+    <div class="filtro">
+        <div uib-collapse="!isCollapsed">
+            <hr>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Laboratorio" ng-model="busqueda.laboratorio" readonly>
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a ng-click="selectLaboratorio(null)">Resetear</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a ng-repeat="laboratorio in laboratorios | orderBy" ng-click="selectLaboratorio(laboratorio)">{{laboratorio}}</a></li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div class="col-sm-3">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Maquina" ng-model="busqueda.maquina" readonly>
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled="busqueda.laboratorio == undefined">
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a ng-click="selectMaquina(null)">Resetear</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a ng-repeat="maquina in maquinas | orderBy:'maquina' | filter: maquinaFilter" ng-click="selectMaquina(maquina.maquina)">{{maquina.maquina}}</a></li>
+                            </ul>
+                        </div><!-- /btn-group -->
+                    </div><!-- /input-group -->
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" class="form-control" placeholder="Buscar" ng-model="busqueda.$">
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+    <uib-accordion>
+        <div uib-accordion-group class="panel-default" ng-repeat="incidencia in incidencias | orderBy: 'falla.fecha' | filter: busqueda"  ng-class="{'solved': ((incidencia.falla.solucion.descripcion != undefined && incidencia.falla.solucion.descripcion != '') || (incidencia.falla.solucion.fecha != undefined && incidencia.falla.solucion.fecha != ''))}">
+            <uib-accordion-heading>
+                <small>{{incidencia.falla.fecha | date:'dd/MM/yy HH:mm'}}</small> |
+                <strong>{{incidencia.laboratorio}} - {{incidencia.maquina}}:</strong>
+                <i style="width: 100%">{{incidencia.falla.sistemaOperativo.nombre}}</i>
+                <span ng-show="((incidencia.falla.solucion.descripcion != undefined && incidencia.falla.solucion.descripcion != '') || (incidencia.falla.solucion.fecha != undefined && incidencia.falla.solucion.fecha != ''))" class="glyphicon glyphicon-ok pull-right" style="color: darkgreen;"></span>
+                <span ng-hide="((incidencia.falla.solucion.descripcion != undefined && incidencia.falla.solucion.descripcion != '') || (incidencia.falla.solucion.fecha != undefined && incidencia.falla.solucion.fecha != ''))" class="glyphicon glyphicon-record pull-right" style="color: darkgoldenrod;"></span>
+            </uib-accordion-heading>
+            <div class="btn-group btn-group-xs edit-buttons" role="group" aria-label="...">
+                <button ui-sref="incidencias.solucion({id: incidencia._id})" type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+                <button ui-sref="incidencias.edit({id: incidencia._id})" type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span></button>
+                <button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="field_codigoError">Código de error</label>
+                            <input class="form-control" id="field_codigoError" ng-model="incidencia.falla.codigo" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="field_descripcionError">Descripción del error</label>
+                            <textarea class="form-control text-area" rows="4" id="field_descripcionError" ng-model="incidencia.falla.descripcion" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="field_estadoFalla">Estado de la falla</label>
+                            <input class="form-control" id="field_estadoFalla" ng-model="incidencia.falla.estado" readonly>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="field_comentarioSistemaOperativo">Comentario del Sistema Operativo</label>
+                            <textarea class="form-control text-area" rows="4" id="field_comentarioSistemaOperativo" ng-model="incidencia.falla.sistemaOperativo.comentario" readonly></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="field_condicionesEjecucion">Condiciones de ejecución</label>
+                            <textarea class="form-control text-area" rows="4" id="field_condicionesEjecucion" ng-model="incidencia.falla.condiciones" readonly></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <hr>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="field_fecha">Fecha</label>
+                            <input type="text" class="form-control" id="field_fecha" datetime-picker="dd MMM yyyy HH:mm" ng-model="incidencia.falla.solucion.fecha" is-open="isOpen" readonly />
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                            <label for="field_descripcionSolucion">Descripción de la solución</label>
+                            <textarea class="form-control text-area" rows="4" id="field_descripcionSolucion" ng-model="incidencia.falla.solucion.descripcion" readonly></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <hr>
+                    </div>
+                    <div class="col-sm-12">
+                        <label class="control-label">Capturas</label>
+                        <br>
+                        <div class="capturas" ngf-drop ngf-change="setImagen($file)" ngf-pattern="'image/*'">
+                            <h4 ng-show="incidencia.falla.capturas.length==0">No hay capturas.</h4>
+                            <div ng-repeat="captura in incidencia.falla.capturas track by $index" class="image-block">
+                                <img data-ng-src="{{'data:' + captura.imagenContentType + ';base64,' + captura.imagen}}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </uib-accordion>
+</div>

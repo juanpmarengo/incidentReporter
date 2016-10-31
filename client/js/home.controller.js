@@ -1,0 +1,3 @@
+incidentReporterApp.controller('HomeController', function () {
+
+});

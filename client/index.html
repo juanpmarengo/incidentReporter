@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Incident Reporter</title>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-loading-bar/build/loading-bar.css" type='text/css'/>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+</head>
+<body ng-app="incidentReporterApp">
+    <div class="container">
+        <div align="center">
+            <h2><img class="img-responsive" src="images/logo.png"></h2>
+        </div>
+        <div class="well">
+            <ul class="nav nav-tabs" ng-controller="MainController">
+                <li role="presentation" ng-class="{active: ($state.includes('home'))}"><a ui-sref="home">Inicio</a></li>
+                <li role="presentation" ng-class="{active: ($state.includes('incidencias'))}"><a ui-sref="incidencias">Incidencias</a></li>
+            </ul>
+            <div ui-view="content"></div>
+        </div>
+    </div>
+    <div class="footer">
+        <span>©2016 IncidentReporter un servicio de Marengo Juan Pablo</span>
+    </div>
+    <script type="text/javascript" src="bower_components/angular/angular.js"></script>
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script type="text/javascript" src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+    <script type="text/javascript" src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
+    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+    <script type="text/javascript" src="bower_components/angular-loading-bar/build/loading-bar.js"></script>
+
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/service.js"></script>
+    <script type="text/javascript" src="js/main.controller.js"></script>
+    <script type="text/javascript" src="js/home.controller.js"></script>
+    <script type="text/javascript" src="js/incidencias.controller.js"></script>
+    <script type="text/javascript" src="js/incidencias-dialog.controller.js"></script>
+    <script type="text/javascript" src="js/incidencias-solucion-dialog.controller.js"></script>
+</body>
+</html>
