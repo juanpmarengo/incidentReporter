@@ -1,6 +1,6 @@
 var incidentReporterApp = angular.module('incidentReporterApp', ['angular-loading-bar', 'ui.router', 'ngResource', 'ngFileUpload', 'ngAnimate', 'ui.bootstrap', 'ui.bootstrap.datetimepicker']);
 
-incidentReporterApp.config(function ($stateProvider, $urlRouterProvider) {
+incidentReporterApp.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
     $urlRouterProvider.otherwise('/');
 
@@ -122,4 +122,6 @@ incidentReporterApp.config(function ($stateProvider, $urlRouterProvider) {
             });
         }]
     });
+
+    $locationProvider.html5Mode(true);
 });
