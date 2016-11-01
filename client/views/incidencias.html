@@ -95,16 +95,16 @@
                             <textarea class="form-control text-area" rows="4" id="field_condicionesEjecucion" ng-model="incidencia.falla.condiciones" readonly></textarea>
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" ng-show="((incidencia.falla.solucion.descripcion != undefined && incidencia.falla.solucion.descripcion != '') || (incidencia.falla.solucion.fecha != undefined && incidencia.falla.solucion.fecha != ''))">
                         <hr>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" ng-show="((incidencia.falla.solucion.descripcion != undefined && incidencia.falla.solucion.descripcion != '') || (incidencia.falla.solucion.fecha != undefined && incidencia.falla.solucion.fecha != ''))">
                         <div class="form-group">
-                            <label for="field_fecha">Fecha</label>
+                            <label for="field_fecha">Fecha de la solucion</label>
                             <input type="text" class="form-control" id="field_fecha" datetime-picker="dd MMM yyyy HH:mm" ng-model="incidencia.falla.solucion.fecha" is-open="isOpen" readonly />
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12" ng-show="((incidencia.falla.solucion.descripcion != undefined && incidencia.falla.solucion.descripcion != '') || (incidencia.falla.solucion.fecha != undefined && incidencia.falla.solucion.fecha != ''))">
                         <div class="form-group">
                             <label for="field_descripcionSolucion">Descripción de la solución</label>
                             <textarea class="form-control text-area" rows="4" id="field_descripcionSolucion" ng-model="incidencia.falla.solucion.descripcion" readonly></textarea>

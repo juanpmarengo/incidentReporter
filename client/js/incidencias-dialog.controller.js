@@ -15,7 +15,7 @@ incidentReporterApp.controller('InicidenciasDialogController', function ($scope,
         });
     }
 
-    $scope.maquinas = ["Maquina 1", "Maquina 2", "Maquina 3"];
+    $scope.maquinas = ["Maquina 1", "Maquina 2", "Maquina 3", "Maquina 4", "Maquina 5", "Maquina 6", "Maquina 7", "Maquina 8", "Maquina 9", "Maquina 10", "Maquina 11", "Maquina 12", "Maquina 13", "Maquina 14", "Maquina 15"];
     $scope.laboratorios = ["Laboratorio 1", "Laboratorio 2", "Laboratorio 3"];
 
     $scope.selectMaquina = function(maquina){

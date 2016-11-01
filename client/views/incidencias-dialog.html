@@ -26,12 +26,19 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="field_maquina">Máquina</label>
-                        <select class="form-control" id="field_maquina" name="maquina" ng-model="incidencia.maquina">
-                            <option ng-click="selectMaquina(undefined)"></option>
-                            <option ng-repeat="maquina in maquinas" ng-click="selectMaquina(maquina)">{{maquina}}</option>
-                        </select>
-                    </div>
+                        <label for="field_maquina">Maquina</label>
+                        <div class="input-group">
+                            <input type="text" id="field_maquina" class="form-control" ng-model="incidencia.maquina" disabled>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span></button>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a>Nueva maquina</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li ng-repeat="maquina in maquinas" ng-click="selectMaquina(maquina)"><a>{{maquina}}</a></li>
+                                </ul>
+                            </div><!-- /btn-group -->
+                        </div>
+                    </div><!-- /input-group -->
                 </div>
                 <div class="col-sm-12">
                     <hr>
