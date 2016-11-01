@@ -80,6 +80,27 @@ incidentReporterApp.config(function ($stateProvider, $urlRouterProvider) {
             });
         }]
     })
+    .state('incidencias.delete', {
+        parent: 'incidencias',
+        url: '/delete/{id}',
+        onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+            $uibModal.open({
+                templateUrl: 'views/incidencias-delete-dialog.html',
+                controller: 'IncidenciasDeleteDialogController',
+                backdrop: 'static',
+                size: 'md',
+                resolve: {
+                    entity: function (Incidencias) {
+                        return Incidencias.get({id : $stateParams.id});
+                    }
+                }
+            }).result.then(function() {
+                $state.go('incidencias', null, { reload: true });
+            }, function() {
+                $state.go('incidencias');
+            });
+        }]
+    })
     .state('incidencias.solucion', {
         parent: 'incidencias',
         url: '/solucion/{id}',
